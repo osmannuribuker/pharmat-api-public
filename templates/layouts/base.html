@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<body>
+    <h5>Base</h5>
+    {% block content %}
+    {% endblock content %}
+    <script>
+        var authToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEzMjQyMzYxLCJqdGkiOiJiOTZkODEwOTY5MDI0MjdjOThjZDYzMWI2NDk2OTBhNCIsInVzZXJfaWQiOjV9.VcKetthR7YKClzBKrBfE3DKv3rTYMFnq22-5f4aAAaY";
+        document.cookie = 'authorization=' + authToken + ';'
+        var url = 'ws://' + window.location.host + '/ws/pharmacy/1'
+        var socket = new WebSocket(url);
+
+        socket.onopen = function open() {
+            console.log('WebSockets connection created.');
+        };
+
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.onopen();
+        }
+    </script>
+</body>
+
+</html>
